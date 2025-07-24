@@ -14,7 +14,7 @@ export const Leagues = ({ isLoading, error, leagues }: LeaguesProps) => {
   if (isLoading)
     return (
       <div className="flex justify-center mt-12">
-        <>Content Loading</>
+        <EmptyState label="Loading Data..." />
       </div>
     );
 

@@ -17,3 +17,12 @@ export enum StrSport {
   Motorsport = "Motorsport",
   Soccer = "Soccer",
 }
+
+export interface Badge {
+  seasons: Season[];
+}
+
+export interface Season {
+  strSeason: string;
+  strBadge: null | string;
+}

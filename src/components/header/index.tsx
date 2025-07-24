@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import { Container, DropdownMenu, Input } from "../../shared";
 import { Search } from "lucide-react";
 import { ROUTES } from "../../router";
@@ -6,10 +6,12 @@ import type { DropdownMenuListItemProps } from "../../shared/ui/components/dropd
 import { StrSport } from "../../services/http";
 
 export const Header = () => {
+  const location = useLocation();
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
   const sportQuery = searchParams.get("sport");
-
+  const { pathname } = location;
+  const isHome = pathname === ROUTES.HOME;
   const handleSearchParams = (key: string, value: string) => {
     searchParams.set(key, value);
 
@@ -59,17 +61,19 @@ export const Header = () => {
               <span className="text-2xl font-bold text-gray-900">Sporty</span>
             </Link>
           </div>
-          <div className="flex items-center">
-            <Input
-              value={searchQuery || ""}
-              startIcon={<Search />}
-              onChange={(e) => handleSearchParams("search", e.target.value)}
-              placeholder="Search for a league..."
-            />
-            <div className="ml-2">
-              <DropdownMenu items={dropdownMenuItems()} />
+          {isHome && (
+            <div className="flex items-center">
+              <Input
+                value={searchQuery || ""}
+                startIcon={<Search />}
+                onChange={(e) => handleSearchParams("search", e.target.value)}
+                placeholder="Search for a league..."
+              />
+              <div className="ml-2">
+                <DropdownMenu items={dropdownMenuItems()} />
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </Container>
     </header>

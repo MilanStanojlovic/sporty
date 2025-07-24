@@ -2,7 +2,7 @@ import { Leagues } from "../../components";
 import { useLeagues } from "../../hooks";
 import { Container } from "../../shared";
 
-export const Home = () => {
+export const HomePage = () => {
   const { leagues, isLoading, error } = useLeagues();
 
   return (

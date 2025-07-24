@@ -1,27 +1,34 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "../../App";
 import { ROUTES } from "../routes";
-import { Home } from "../../pages";
+import { HomePage, LeagueDetailsPage, NotFoundPage } from "../../pages";
+import { EmptyState } from "../../shared";
 
 const router = createBrowserRouter([
   {
     element: <App />,
+    errorElement: (
+      <EmptyState
+        label="Error Occured"
+        description="Looks like something unexpectred happened."
+      />
+    ),
     children: [
       {
         path: ROUTES.HOME,
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: ROUTES.LEAGUES,
-        element: <>Leagues</>,
+        element: <HomePage />,
       },
       {
         path: ROUTES.LEAGUE_INFO,
-        element: <>League Info</>,
+        element: <LeagueDetailsPage />,
       },
       {
         path: ROUTES.NOT_FOUND,
-        element: <>Not Found</>,
+        element: <NotFoundPage label="Page not found" />,
       },
     ],
   },

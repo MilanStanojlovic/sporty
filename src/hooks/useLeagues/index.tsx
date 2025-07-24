@@ -3,7 +3,9 @@ import { GetLeagues, type League } from "../../services/http";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 export const useLeagues = () => {
-  const [leagues, setLeagues] = useState<League[]>([]);
+  const lsLeagues = localStorage.getItem("leagues");
+  const parsedLeagues = lsLeagues ? JSON.parse(lsLeagues) : null;
+  const [leagues, setLeagues] = useState<League[]>(parsedLeagues || []);
   const [error, setError] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams] = useSearchParams();
@@ -15,6 +17,7 @@ export const useLeagues = () => {
     try {
       const response = await GetLeagues();
       setLeagues(response.leagues);
+      localStorage.setItem("leagues", JSON.stringify(response.leagues));
       /* eslint-disable  @typescript-eslint/no-explicit-any */
     } catch (error: any) {
       setError(error?.message as string);
@@ -38,8 +41,9 @@ export const useLeagues = () => {
   );
 
   useEffect(() => {
+    if (parsedLeagues) return;
     fetchLeagues();
-  }, []);
+  }, [fetchLeagues, parsedLeagues]);
 
   return {
     leagues: filteredLeagues,
