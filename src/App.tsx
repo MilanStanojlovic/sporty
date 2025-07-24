@@ -1,9 +1,10 @@
 import { Outlet } from "react-router";
+import { Header } from "./components";
 
 function App() {
   return (
     <>
-      <div className="bg-amber-400 text-2xl">Hello World</div>
+      <Header />
       <Outlet />
     </>
   );
