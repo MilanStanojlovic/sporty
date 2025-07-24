@@ -2,6 +2,8 @@ import { Link, useSearchParams } from "react-router";
 import { Container, DropdownMenu, Input } from "../../shared";
 import { Search } from "lucide-react";
 import { ROUTES } from "../../router";
+import type { DropdownMenuListItemProps } from "../../shared/ui/components/dropdown/list-item";
+import { StrSport } from "../../services/http";
 
 export const Header = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -13,6 +15,40 @@ export const Header = () => {
 
     setSearchParams(searchParams);
   };
+
+  const isSportSelected = (sport: StrSport): boolean => sportQuery === sport;
+
+  const dropdownMenuItems = (): DropdownMenuListItemProps[] => [
+    {
+      label: StrSport.Soccer,
+      onClick: () => handleSearchParams("sport", StrSport.Soccer),
+      isSelected: isSportSelected(StrSport.Soccer),
+    },
+    {
+      label: StrSport.Basketball,
+      onClick: () => handleSearchParams("sport", StrSport.Basketball),
+      isSelected: isSportSelected(StrSport.Basketball),
+    },
+    {
+      label: StrSport.AmericanFootball,
+      onClick: () => handleSearchParams("sport", StrSport.AmericanFootball),
+      isSelected: isSportSelected(StrSport.AmericanFootball),
+    },
+    {
+      label: StrSport.IceHockey,
+      onClick: () => handleSearchParams("sport", StrSport.IceHockey),
+      isSelected: isSportSelected(StrSport.IceHockey),
+    },
+    {
+      label: StrSport.Motorsport,
+      onClick: () => handleSearchParams("sport", StrSport.Motorsport),
+      isSelected: isSportSelected(StrSport.Motorsport),
+    },
+    {
+      label: "Clear",
+      onClick: () => handleSearchParams("sport", ""),
+    },
+  ];
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-10">
@@ -31,28 +67,7 @@ export const Header = () => {
               placeholder="Search for a league..."
             />
             <div className="ml-2">
-              <DropdownMenu
-                items={[
-                  {
-                    label: "Football",
-                    onClick: () => {
-                      handleSearchParams("sport", "football");
-                    },
-                    isSelected: sportQuery === "football",
-                  },
-                  {
-                    label: "Basketball",
-                    onClick: () => {
-                      handleSearchParams("sport", "basketball");
-                    },
-                    isSelected: sportQuery === "basketball",
-                  },
-                  {
-                    label: "Clear",
-                    onClick: () => handleSearchParams("sport", ""),
-                  },
-                ]}
-              />
+              <DropdownMenu items={dropdownMenuItems()} />
             </div>
           </div>
         </div>

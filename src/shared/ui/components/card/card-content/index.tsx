@@ -3,5 +3,5 @@ interface CardContentProps {
 }
 
 export const CardContent = ({ children }: CardContentProps) => (
-  <div className="mt-auto p-4 bg-white">{children}</div>
+  <div className="mt-auto p-4 flex-1">{children}</div>
 );

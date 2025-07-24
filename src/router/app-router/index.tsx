@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router";
 import App from "../../App";
 import { ROUTES } from "../routes";
+import { Home } from "../../pages";
 
 const router = createBrowserRouter([
   {
@@ -8,7 +9,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: ROUTES.HOME,
-        element: <>Home</>,
+        element: <Home />,
       },
       {
         path: ROUTES.LEAGUES,
