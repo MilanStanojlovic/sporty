@@ -10,4 +10,11 @@ Currently, two official plugins are available:
 ## AI
 - v0
 - chatgpt
+- github copilot
+## Design
+- Reusable components in shared folder
+- Project specific components in components folder
+- logic separated from the UI with hooks 
+- modules could be introduced as another way of abstraction and easier way of implementing micro frontend architecture
+- localstorage used for caching could be improved with indexdb, service workers working with cache or implementing 3rd party solution like react query depending on the desired outcome
 
